@@ -91,12 +91,11 @@ export default {
                 this.isLoading = false;
                 this.activeAccount.save();
                 this.$router.push({ name: 'start' });
-            })
-                .catch(err => {
-                    console.warn(err);
-                    this.isLoading = false;
-                    this.$toast(this.$t('hint.err'));
-                });
+            }).catch(err => {
+                console.warn(err);
+                this.isLoading = false;
+                this.$toast(this.$t('hint.err'));
+            });
         }
     }
 };

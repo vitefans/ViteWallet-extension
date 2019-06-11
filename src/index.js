@@ -1,4 +1,3 @@
-import 'utils/performance';
 import 'assets/scss/mixins.scss';
 import 'utils/viteClient';
 
@@ -43,9 +42,11 @@ setTimeout(() => {
     new Vue({
         el: '#app',
         components: { App },
-        template: '<App/>',
         store,
         router,
-        i18n
+        i18n,
+        render(h) {
+            return h('App');
+        }
     });
 }, 1800);

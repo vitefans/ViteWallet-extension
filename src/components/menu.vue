@@ -1,25 +1,17 @@
 <template>
-    <div v-click-outside="hideMenu" class="menu-wrapper">
+    <div v-click-outside="hideMenu">
         <div class="header">
-            <img class="vite-logo" :src="viteLogo" />
-            <span class="menu __pointer" @click="clickMenu"></span>
+            <img class="vite-logo" v-once src="~assets/imgs/ViteLogo2.svg" />
+            <span class="menu" @click="toggle"></span>
         </div>
 
-        <div class="menu-list" :style="`height: ${showList ? menuListHeight : 0}px`">
-            <div v-for="(name, i) in menuList" :key="i"
-                 class="item" :style="`height: ${itemHeight}px; line-height: ${itemHeight}px`" @click="_go(name)"
-                 :class="{ 'active': active.indexOf(name) >= 0 }">
-                {{ name !== 'logout' && name !== 'login' ? $t(`${name}.title`) : $t(name) }}
-            </div>
+        <div class="menu-list" :class="{'show': showList }">
+            <div v-for="(item, i) in menuList" :key="i" class="item" @click="go(item)">{{ item.title }}</div>
         </div>
     </div>
 </template>
 
 <script>
-import viteLogo from 'assets/imgs/ViteLogo2.svg';
-
-const itemHeight = 60;
-
 export default {
     props: {
         active: {
@@ -30,34 +22,24 @@ export default {
             type: Array,
             default: () => []
         },
-        go: {
+        menuListClick: {
             type: Function,
             default: () => {}
         }
     },
     data() {
-        return {
-            viteLogo,
-            itemHeight,
-            showList: false
-        };
-    },
-    computed: {
-        menuListHeight() {
-            return itemHeight * this.menuList.length;
-        }
+        return { showList: false };
     },
     methods: {
-        clickMenu() {
+        toggle() {
             this.showList = !this.showList;
         },
         hideMenu() {
             this.showList = false;
         },
-
-        _go(name) {
+        go(item) {
             this.hideMenu();
-            this.go(name);
+            this.menuListClick(item);
         }
     }
 };
@@ -66,19 +48,17 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.menu-wrapper {
-    position: relative;
-    z-index: 50;
-}
-
 .header {
-    padding: 15px 15px 13px 15px;
+    padding: 10px 15px;
     background: #fff;
     box-shadow: 0 6px 36px 0 rgba(0, 62, 100, 0.04);
+    overflow: hidden;
 
     .vite-logo {
-        width: 67.5px;
         height: 35px;
+        border: none;
+        outline: none;
+        float: left;
     }
 
     .menu {
@@ -98,10 +78,9 @@ export default {
 }
 
 .menu-list {
-    margin-top: 5px;
     box-sizing: border-box;
     position: absolute;
-    top: 64px;
+    margin-top: 2px;
     font-family: $font-bold, arial, sans-serif;
     font-size: 14px;
     color: #1d2024;
@@ -109,14 +88,23 @@ export default {
     padding: 0 15px;
     width: 100%;
     background: #fff;
-    box-shadow: 0 6px 36px 0 rgba(0, 62, 100, 0.04);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .4);
     overflow: hidden;
     transition: all 0.3s ease-in-out;
+    transform: scaleY(0);
+    transform-origin: 0 0;
+    z-index: 10;
+
+    &.show {
+        transform: scaleY(1);
+    }
 
     .item {
         box-sizing: border-box;
         margin-top: 0;
         border-bottom: 1px solid #d7dce5;
+        height: 50px;
+        line-height: 50px;
 
         &:last-child {
             border: none;

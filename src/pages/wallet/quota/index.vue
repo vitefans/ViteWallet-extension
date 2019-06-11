@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import quotaHead from './quotaHead';
 import myQuota from './myQuota';
 import pledgeTx from './pledgeTx';
@@ -53,10 +52,9 @@ export default {
             this.$store.dispatch('fetchTokenInfo').then(tokenInfo => {
                 this.loadingToken = false;
                 this.tokenInfo = tokenInfo;
-            })
-                .catch(err => {
-                    console.warn(err);
-                });
+            }).catch(err => {
+                console.warn(err);
+            });
         }
     },
     data() {
@@ -128,7 +126,7 @@ export default {
             this.stopWatch = true;
             this.cancelAmount = '';
             this.amountErr = '';
-            Vue.nextTick(() => {
+            this.$nextTick(() => {
                 this.stopWatch = false;
             });
             this.showConfirmType = '';

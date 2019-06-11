@@ -76,11 +76,11 @@ const plugins = [
         }
     ]),
     new HtmlWebpackPlugin({
-        template: path.join(SRC_PATH, 'popup.html'),
+        template: path.join(SRC_PATH, 'index.html'),
         title: 'Vite Wallet',
-        filename: 'popup.html',
+        filename: 'index.html',
         favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
-        chunks: ['popup']
+        chunks: ['index']
     }),
     new HtmlWebpackPlugin({
         template: path.join(SRC_PATH, 'options.html'),
@@ -90,10 +90,9 @@ const plugins = [
         chunks: ['options']
     }),
     new HtmlWebpackPlugin({
-        template: path.join(SRC_PATH, 'background.html'),
-        filename: 'background.html',
-        favicon: path.join(SRC_PATH, 'assets/imgs/logo.png'),
-        chunks: ['background']
+        template: path.join(SRC_PATH, 'privacy.html'),
+        filename: 'privacy.html',
+        favicon: path.join(SRC_PATH, 'assets/imgs/logo.png')
     }),
     new WriteFilePlugin(),
     new VueLoaderPlugin(),

@@ -4,21 +4,16 @@
 
         <create ref="createDom" :submit="createAccount"></create>
 
-        <div @click="toogleAgree" class="agreement __pointer" :class="{
-            'active': isAgree
-        }">{{ $t('startCreate.agreementPre') }}
-            <span @click.stop="openLink" class="link">{{ $t('startCreate.agreement') }}</span>
+        <div @click="toogleAgree" class="agreement __pointer" :class="{'active': isAgree}">
+            {{ $t('startCreate.agreementPre') }}
+            <a href="privacy.html" class="link">{{ $t('startCreate.agreement') }}</a>
         </div>
 
         <div class="__btn_list">
-            <span class="__btn __btn_border __pointer" @click="back" >
-                {{ $t('btn.back') }}
-            </span>
-            <div class="__btn __btn_all_in __pointer" :class="{
-                'unuse': !isAgree
-            }" @click="valid">
+            <button class="__btn __btn_border __pointer" type="button" @click="back" >{{ $t('btn.back') }}</button>
+            <button class="__btn __btn_all_in __pointer" type="button" :disabled="!isAgree" @click="valid">
                 {{ $t('btn.next')}}
-            </div>
+            </button>
         </div>
 
         <process class="process" active="createAccount"></process>
@@ -26,7 +21,7 @@
 </template>
 
 <script>
-import create from '../create.vue';
+import create from '../createForm.vue';
 import process from 'components/process';
 
 export default {
@@ -50,20 +45,17 @@ export default {
             if (!this.isAgree) {
                 return;
             }
-            this.$refs.createDom && this.$refs.createDom.valid();
+            this.$refs.createDom.valid();
         },
         back() {
             this.$router.go(-1);
         },
         createAccount(name, pass) {
             this.$wallet.create(name, pass);
-            this.$router.push({ name: 'startRecord' });
+            this.$router.push({ name: 'record' });
         },
         toogleAgree() {
             this.isAgree = !this.isAgree;
-        },
-        openLink() {
-            window.open(`${ location.origin }/privacy.html`);
         }
     }
 };
@@ -82,6 +74,7 @@ export default {
     line-height: 18px;
     .link {
         text-decoration: underline;
+        color: inherit;
     }
     &.active {
         &::before {
@@ -101,9 +94,10 @@ export default {
     }
 }
 
-.__btn.__btn_all_in.unuse {
+.__btn.__btn_all_in:disabled {
     background: rgba(191,191,191,1);
     color: #fff;
+    cursor: none;
 }
 
 .__btn_list {

@@ -10,7 +10,7 @@
     "persistent": true
   },
   "browser_action": {
-    "default_popup": "popup.html",
+    "default_popup": "index.html",
     "default_icon": "icons/logo.png"
   },
   "commands": {
@@ -28,11 +28,14 @@
     "48": "icons/logo.png",
     "128": "icons/logo.png"
   },
-  "applications": {
-
-  },
-  "default_locale": "zh",
-  "content_scripts": [],
+  "content_scripts": [{
+    "matches": [
+      "https://localhost:8081/*"
+    ],
+    "js": [
+      "content.js"
+    ]
+  }],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "permissions": [
     "storage",
@@ -44,7 +47,5 @@
     "webRequest",
     "*://*.eth/",
     "notifications"
-  ],
-  "web_accessible_resources": [],
-  "externally_connectable": {}
+  ]
 }

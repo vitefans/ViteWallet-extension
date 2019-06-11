@@ -4,14 +4,12 @@ const merge = require('webpack-merge');
 const SRC_PATH = path.join(__dirname, 'src');
 const DIST_PATH = path.join(__dirname, 'dist');
 
-// auto run
-require('./buildRoutes');
-
 let options = {
     entry: {
-        popup: path.join(SRC_PATH, 'popup.js'),
+        index: path.join(SRC_PATH, 'index.js'),
         options: path.join(SRC_PATH, 'options.js'),
-        background: path.join(SRC_PATH, 'background.js')
+        background: path.join(SRC_PATH, 'background.js'),
+        content: path.join(SRC_PATH, 'content.js')
     },
     output: {
         path: DIST_PATH,

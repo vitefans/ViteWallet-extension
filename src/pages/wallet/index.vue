@@ -1,39 +1,34 @@
 <template>
-    <div class="wallet-wrapper">
-        <account v-if="active === 'wallet'"></account>
+    <div>
+        <vite-menu :menu-list-click="go" active="wallet" :menuList="[{
+            title: 'wallet',
+            path: '/',
+        }, {
+            title: 'quota',
+            path: '/quota',
+        }, {
+            title: 'sbp',
+            path: '/sbp',
+        }, {
+            title: 'vote',
+            path: '/vote',
+        }, {
+            title: 'transactions',
+            path: '/tx',
+        }]"></vite-menu>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
-import account from './account/account.vue';
+import viteMenu from 'components/menu.vue';
 
 export default {
-    components: { account },
-    mounted() {
-        this.$router.afterEach(to => {
-            this.active = to.name;
-        });
-    },
-    data() {
-        return { active: this.$route.name };
+    components: { viteMenu },
+    methods: {
+        go(item) {
+            this.$router.push({ path: item.path });
+        }
     }
 };
 </script>
-
-<style lang="scss" scoped>
-.wallet-wrapper {
-    height: 100%;
-}
-
-.__wrapper {
-    padding: 30px;
-}
-
-@media only screen and (max-width: 850px) {
-    .__wrapper {
-        padding: 15px;
-    }
-}
-</style>
-

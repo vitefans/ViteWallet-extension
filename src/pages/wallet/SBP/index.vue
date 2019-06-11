@@ -33,10 +33,10 @@
 
 <script>
 import { hdAddr } from '@vite/vitejs';
-import secTitle from 'components/secTitle';
-import loading from 'components/loading';
-import confirm from 'components/confirm';
-import viteInput from 'components/viteInput';
+import secTitle from 'components/secTitle.vue';
+import loading from 'components/loading.vue';
+import confirm from 'components/confirm.vue';
+import viteInput from 'components/viteInput.vue';
 import BigNumber from 'utils/bigNumber';
 import sendTx from 'utils/sendTx';
 import register from './register';

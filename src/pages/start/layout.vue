@@ -44,11 +44,7 @@ export default {
     }
 
     .header {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        padding: 40px;
+        padding: 20px;
 
         .header-logo {
             display: inline-block;
@@ -65,22 +61,14 @@ export default {
         height: 100%;
         display: flex;
         justify-content: center;
-        align-items: center;
         overflow: auto;
 
         .confirm {
             position: relative;
             width: 100%;
-            max-width: 360px;
             text-align: center;
             padding: 20px;
         }
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .index-layout-wrapper .header {
-        padding: 40px 0 40px 20px;
     }
 }
 </style>

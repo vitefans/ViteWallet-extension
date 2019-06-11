@@ -1,6 +1,5 @@
-import toast from 'components/toast/index.js';
-import confirm from 'components/confirm/index.js';
-import statistics from 'utils/statistics';
+import toast from 'components/toast/index';
+import confirm from 'components/confirm/index';
 import { wallet } from 'utils/wallet';
 
 document.addEventListener('drop', e => {
@@ -69,8 +68,6 @@ export default {
         };
 
         Vue.prototype.$confirm = confirm;
-
-        Vue.prototype.$statistics = statistics;
 
         Vue.prototype.$wallet = wallet;
     }

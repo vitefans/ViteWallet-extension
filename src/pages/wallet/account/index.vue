@@ -1,9 +1,9 @@
 <template>
-    <div class="account-wrapper __wrapper">
-        <div class="head">
-            <sync-block class="sync-block"></sync-block>
-        </div>
-        <account-head class="item"></account-head>
+    <div class="account-wrapper">
+        <sync-block />
+
+        <account-head />
+
         <div class="token-list item">
             <tokenCard v-for="token in tokenList" :key="token.id"
                        :opt="token" :sendTransaction="showTrans"></tokenCard>

@@ -1,11 +1,7 @@
 <template>
-    <div class="sync-block-wrapper">
-        <span class="status-text" v-show="!netStatus">
-            {{ $t(`hint.noNet`) }}
-        </span>
-        <span v-show="netStatus">
-            {{ $t(`blockHeight`) + ': ' + (blockHeight || '----') }}
-        </span>
+    <div class="chain-status">
+        <span v-if="netStatus">{{ $t(`blockHeight`) + ': ' + (blockHeight || '----') }}</span>
+        <span v-else>{{ $t(`hint.noNet`) }}</span>
     </div>
 </template>
 
@@ -25,14 +21,12 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.sync-block-wrapper {
+.chain-status {
     font-family: $font-bold, arial, sans-serif;
     font-size: 16px;
     color: #1d2024;
     line-height: 20px;
-
-    .status-text {
-        margin-right: 10px;
-    }
+    padding: 20px 0;
+    text-align: center;
 }
 </style>

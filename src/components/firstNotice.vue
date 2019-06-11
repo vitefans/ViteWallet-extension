@@ -1,5 +1,5 @@
 <template>
-    <div class="first-notice-wrapper" v-show="isFirst">
+    <div class="first-notice-wrapper" v-if="isFirst">
         <div class="wrapper">
             <div class="title">{{ $t('beforeUse.title') }}</div>
             <ul class="first-notice">
@@ -16,11 +16,11 @@
 import localStorage from 'utils/localStorage';
 
 export default {
-    mounted() {
-        this.isFirst = !localStorage.getItem('first');
-    },
     data() {
         return { isFirst: false };
+    },
+    created() {
+        this.isFirst = !localStorage.getItem('first');
     },
     methods: {
         close() {

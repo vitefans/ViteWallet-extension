@@ -1,6 +1,5 @@
 import { hdAddr as _hdAddr, keystore as _keystore, constant } from '@vite/vitejs';
 import acc from 'utils/storeAcc.js';
-import statistics from 'utils/statistics';
 import storage from 'utils/localStorage.js';
 
 const { LangList } = constant;
@@ -49,7 +48,6 @@ export default function () {
         return;
     }
 
-    statistics.event('keystore', 'resave');
     setLast(last);
     acc.setAccList(reList);
 }

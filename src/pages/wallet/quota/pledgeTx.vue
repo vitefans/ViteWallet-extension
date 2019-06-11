@@ -177,8 +177,6 @@ export default {
                 return;
             }
 
-            this.$statistics.event('Vite_web_wallet', 'quota', 'SubmitQuota');
-
             this.testAmount();
             this.testAddr();
             if (this.amountErr || !this.isValidAddress) {
@@ -196,7 +194,6 @@ export default {
             }, true);
         },
         _sendPledgeTx() {
-            this.$statistics.event('Vite_web_wallet', 'quota', 'ConfirmQuota');
             this.loading = true;
 
             this.sendPledgeTx({

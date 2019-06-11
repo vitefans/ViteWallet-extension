@@ -1,7 +1,6 @@
 import { hdAddr as _hdAddr, keystore as _keystore, utils, constant } from '@vite/vitejs';
 import vitecrypto from 'testwebworker';
 import storeAcc from 'utils/storeAcc';
-import statistics from 'utils/statistics';
 import $ViteJS from 'utils/viteClient';
 import account from './account';
 
@@ -177,14 +176,10 @@ class _wallet {
         const acc = getAccFromAddr(addr);
         const keystore = acc.keystore;
 
-        const before = new Date().getTime();
-
         const privKey = await _keystore.decrypt(JSON.stringify(keystore), pass, vitecrypto);
 
-        const after = new Date().getTime();
         const n = (keystore.crypto && keystore.crypto.scryptparams && keystore.crypto.scryptparams.n)
             ? keystore.crypto.scryptparams.n : 0;
-        statistics.event('keystore-decrypt', n, 'time', after - before);
 
         if (n !== 262144) {
             this.newActiveAcc({
@@ -241,10 +236,7 @@ class _wallet {
         // Very very impotant!!!!!
         encryptObj.encryptentropy = encryptObj.encryptentropy || entropy;
 
-        const before = new Date().getTime();
         const decryptEntropy = await _keystore.decrypt(JSON.stringify(encryptObj), pass, vitecrypto);
-        const after = new Date().getTime();
-        statistics.event('mnemonic-decrypt', encryptObj.version || '1', 'time', after - before);
 
         if (!decryptEntropy) {
             return false;
@@ -266,7 +258,6 @@ class _wallet {
         });
 
         if (!id) {
-            statistics.event('keystore', 'resave-id');
             this.activeWalletAcc.save(i);
         }
 

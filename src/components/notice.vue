@@ -37,26 +37,13 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/vars.scss";
 
-.dex .notice-wrapper {
-    padding: 20px 30px;
-    .title {
-        font-size: 14px;
-    }
-    .describe {
-        font-size: 12px;
-        font-family: $font-normal, arial, sans-serif;
-    }
-}
-
 .notice-wrapper {
     position: relative;
     background: #fff;
     box-shadow: 0 2px 48px 1px rgba(176, 192, 237, 0.42);
     border-radius: 2px;
-    width: 360px;
-    margin-bottom: 20px;
     box-sizing: border-box;
-    padding: 30px;
+    padding: 10px;
     font-family: $font-bold, arial, sans-serif;
     word-wrap: break-word;
     &.normal {
@@ -96,13 +83,6 @@ export default {
         font-size: 14px;
         color: #5e6875;
         line-height: 28px;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .notice-wrapper {
-        width: 300px;
-        padding: 15px;
     }
 }
 </style>
